@@ -1,0 +1,2 @@
+D:\лаба пересдача 3\Новая папка\sln\vc10\Debug\gtest.pdb
+D:\лаба пересдача 3\Новая папка\sln\vc10\gtest\Debug\gtest.pdb

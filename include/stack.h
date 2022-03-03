@@ -1,4 +1,4 @@
-
+п»ї
 #ifndef __TSTACK_H__
 #define __TSTACK_H__
 #define STACK_SIZE (1000)
@@ -11,22 +11,22 @@ protected:
     int Head;
     int Size;
     StackType* mStack;
-    void Overcrowded();     // Проверка на переполнение 
+    void Overcrowded();     // РџСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµРїРѕР»РЅРµРЅРёРµ 
 public:
-    //Конструкторы и деструкторы
+    //РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹ Рё РґРµСЃС‚СЂСѓРєС‚РѕСЂС‹
     TStack();
     ~TStack();
-    //Операции со стеком
-    void Push(StackType i); // Вставка элемента
-    StackType Pop();        // Извлечение элемента
-    StackType Top();        // Просмотр верхнего элемента (без удаления)
-    bool Empty();           // Проверка на пустоту 
-    int Count();            // Получение количества элементов в стеке
-    void Clear();           // Очистка стека
+    //РћРїРµСЂР°С†РёРё СЃРѕ СЃС‚РµРєРѕРј
+    void Push(StackType i); // Р’СЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚Р°
+    StackType Pop();        // РР·РІР»РµС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
+    StackType Top();        // РџСЂРѕСЃРјРѕС‚СЂ РІРµСЂС…РЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° (Р±РµР· СѓРґР°Р»РµРЅРёСЏ)
+    bool Empty();           // РџСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ 
+    int Count();            // РџРѕР»СѓС‡РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° СЌР»РµРјРµРЅС‚РѕРІ РІ СЃС‚РµРєРµ
+    void Clear();           // РћС‡РёСЃС‚РєР° СЃС‚РµРєР°
 };
 
-//Реализация функций класса вектора 
-//Конструкторы и деструкторы    
+//Р РµР°Р»РёР·Р°С†РёСЏ С„СѓРЅРєС†РёР№ РєР»Р°СЃСЃР° РІРµРєС‚РѕСЂР° 
+//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹ Рё РґРµСЃС‚СЂСѓРєС‚РѕСЂС‹    
 template <class StackType>
 TStack<StackType>::TStack()
 {
@@ -39,15 +39,15 @@ TStack<StackType>::~TStack()
 {
     delete[] mStack;
 }
-//Операции со стеком
-template <class StackType> // Вставка элемента
+//РћРїРµСЂР°С†РёРё СЃРѕ СЃС‚РµРєРѕРј
+template <class StackType> // Р’СЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚Р°
 void TStack<StackType>::Push(StackType i)
 {
     Overcrowded();
     mStack[Head] = i;
     Head++;
 }
-template <class StackType> // Извлечение элемента
+template <class StackType> // РР·РІР»РµС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
 StackType TStack<StackType>::Pop()
 {
     if (!Empty())
@@ -56,29 +56,39 @@ StackType TStack<StackType>::Pop()
     }
     else { throw 1; }
 }
-template <class StackType> // Просмотр верхнего элемента (без удаления)
+template <class StackType> // РџСЂРѕСЃРјРѕС‚СЂ РІРµСЂС…РЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° (Р±РµР· СѓРґР°Р»РµРЅРёСЏ)
 StackType TStack<StackType>::Top()
 {
-    if (!Empty()) { return mStack[Head - 1]; }
-    else { throw 1; }
+    if (!Empty()) 
+    { 
+        return mStack[Head - 1]; 
+    }
+    else 
+    { 
+        throw 1; 
+        cout << "Empty stack";
+    }
 }
-template <class StackType> // Проверка на пустоту
+template <class StackType> // РџСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
 bool TStack<StackType>::Empty()
 {
-    if (Head == 0) { return 1; }
+    if (Head == 0) 
+    { 
+        return 1; 
+    }
     else { return 0; }
 }
-template <class StackType> // Получение количества элементов в стеке
+template <class StackType> // РџРѕР»СѓС‡РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° СЌР»РµРјРµРЅС‚РѕРІ РІ СЃС‚РµРєРµ
 int TStack<StackType>::Count()
 {
     return Head;
 }
-template <class StackType> // Очистка стека
+template <class StackType> // РћС‡РёСЃС‚РєР° СЃС‚РµРєР°
 void TStack<StackType>::Clear()
 {
     Head = 0;
 }
-template <class StackType> // Проверка на переполнение 
+template <class StackType> // РџСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµРїРѕР»РЅРµРЅРёРµ 
 void TStack<StackType>::Overcrowded()
 {
     if (Head == Size)
@@ -91,6 +101,7 @@ void TStack<StackType>::Overcrowded()
         {
             mStack[i] = mStack1[i];
         }
+        delete mStack1;
     }
 }
 #endif
