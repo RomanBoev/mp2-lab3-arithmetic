@@ -1,10 +1,10 @@
-// реализация функций и классов для вычисления арифметических выражений
+п»ї// СЂРµР°Р»РёР·Р°С†РёСЏ С„СѓРЅРєС†РёР№ Рё РєР»Р°СЃСЃРѕРІ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёС… РІС‹СЂР°Р¶РµРЅРёР№
 #include "..\include\arithmetic.h"
 #include "..\include\stack.h"
 #include <cmath>
 #include <cstdlib>
 
-// Определение приоритета опирации
+// РћРїСЂРµРґРµР»РµРЅРёРµ РїСЂРёРѕСЂРёС‚РµС‚Р° РѕРїРёСЂР°С†РёРё
 int PR(string a)
 {
     if (a == "(") { return(0); }
@@ -15,7 +15,7 @@ int PR(string a)
     if (a == "^") { return(3); }
     if (a == "sin") { return(4); }
 }
-// Конвертировать строку в число
+// РљРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ С‡РёСЃР»Рѕ
 double Convert(string a)
 {
     string::size_type sz = 0;
@@ -30,7 +30,7 @@ double Convert(string a)
     return res;
 }
 
-//Конструкторы и деструкторы    
+//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹ Рё РґРµСЃС‚СЂСѓРєС‚РѕСЂС‹    
 Tlexeme::Tlexeme(string a)
 {
     Size = a.length();
@@ -49,7 +49,7 @@ Tlexeme::~Tlexeme()
     delete[] mLexeme;
     delete[] priority;
 }
-//Операции
+//РћРїРµСЂР°С†РёРё
 void Tlexeme::Fill(string a)
 {
     Size = a.length();
@@ -64,7 +64,7 @@ void Tlexeme::Fill(string a)
     mLexeme[0] = a;
     Flag = -1;
 }
-void Tlexeme::Divide() //Разбить на лексемы
+void Tlexeme::Divide() //Р Р°Р·Р±РёС‚СЊ РЅР° Р»РµРєСЃРµРјС‹
 {
     string a = mLexeme[0];
     int j = 0;
@@ -72,14 +72,14 @@ void Tlexeme::Divide() //Разбить на лексемы
     string* mLexeme1 = new string[Size];
     int* priority1 = new int[Size];
     for (int i = 0; i < Size; i++)
-    { //знаки операций (кроме минуса)
+    { //Р·РЅР°РєРё РѕРїРµСЂР°С†РёР№ (РєСЂРѕРјРµ РјРёРЅСѓСЃР°)
         if ((a[i] == '+') || (a[i] == '*') || (a[i] == '/') || (a[i] == '^'))
         {
             if (S1 != "") { mLexeme1[j] = S1; priority1[j] = 2; j++; S1 = ""; }
             mLexeme1[j] = a[i];
             priority1[j] = 1; j++;
         }
-        else //минус
+        else //РјРёРЅСѓСЃ
         {
             if (a[i] == '-')
             {
@@ -90,7 +90,7 @@ void Tlexeme::Divide() //Разбить на лексемы
                     priority1[j] = 1; j++;
                 }
             }
-            else //скобки
+            else //СЃРєРѕР±РєРё
             {
                 if ((a[i] == '(') || (a[i] == ')'))
                 {
@@ -98,7 +98,7 @@ void Tlexeme::Divide() //Разбить на лексемы
                     mLexeme1[j] = a[i];
                     priority1[j] = 4; j++;
                 }
-                else // функция sin
+                else // С„СѓРЅРєС†РёСЏ sin
                 {
                     if ((a[i] == 's') && (a[i + 1] == 'i') && (a[i + 2] == 'n'))
                     {
@@ -106,7 +106,7 @@ void Tlexeme::Divide() //Разбить на лексемы
                         mLexeme1[j] = "sin"; i = i + 2;
                         priority1[j] = 5; j++;
                     }
-                    else //операнды-переменные
+                    else //РѕРїРµСЂР°РЅРґС‹-РїРµСЂРµРјРµРЅРЅС‹Рµ
                     {
                         if (((a[i] >= 'A') && (a[i] <= 'Z')) || ((a[i] >= 'a') && (a[i] <= 'z')))
                         {
@@ -114,13 +114,13 @@ void Tlexeme::Divide() //Разбить на лексемы
                             mLexeme1[j] = a[i];
                             priority1[j] = 3; j++;
                         }
-                        else //операнды числа
+                        else //РѕРїРµСЂР°РЅРґС‹ С‡РёСЃР»Р°
                         {
                             if (((a[i] >= '0') && (a[i] <= '9')) || (a[i] == '.'))
                             {
                                 S1 = S1 + a[i];
                             }
-                            else { Flag = 0; } //ошибка не распознаный символ
+                            else { Flag = 0; } //РѕС€РёР±РєР° РЅРµ СЂР°СЃРїРѕР·РЅР°РЅС‹Р№ СЃРёРјРІРѕР»
                         }
                     }
                 }
@@ -157,7 +157,7 @@ int Tlexeme::Check_correct()
     return  Flag;
 }
 int Tlexeme::Check_brack()
-{ //что-то стоит между двух скобок одинакового типа
+{ //С‡С‚Рѕ-С‚Рѕ СЃС‚РѕРёС‚ РјРµР¶РґСѓ РґРІСѓС… СЃРєРѕР±РѕРє РѕРґРёРЅР°РєРѕРІРѕРіРѕ С‚РёРїР°
     int a = -1, i = 0;
     while ((i < Size) && (a == -1))
     {
@@ -165,7 +165,7 @@ int Tlexeme::Check_brack()
         if ((mLexeme[i] == ")") && (mLexeme[i + 1] != ")") && (mLexeme[i + 2] == ")")) { a = i; }
         i++;
     }
-    if (a == -1) //проверка на правильность растановки скобок
+    if (a == -1) //РїСЂРѕРІРµСЂРєР° РЅР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ СЂР°СЃС‚Р°РЅРѕРІРєРё СЃРєРѕР±РѕРє
     {
         TStack <int> S1; i = 0;
         while ((i < Size) && (a == -1))
@@ -188,13 +188,13 @@ int Tlexeme::Check_brack()
 int Tlexeme::Check_sign()
 {
     int a = -1, i = 1;
-    if (priority[0] == 1) { a = 0; } //первый символ в выражении знак операции
+    if (priority[0] == 1) { a = 0; } //РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» РІ РІС‹СЂР°Р¶РµРЅРёРё Р·РЅР°Рє РѕРїРµСЂР°С†РёРё
     while ((i < Size) && (a == -1))
     {
         if (priority[i] == 1)
         {
             if ((priority[i + 1] == 1) || (mLexeme[i - 1] == "(") || (mLexeme[i + 1] == ")")) { a = i; }
-            // два знака подряд, знак после открывающейся скобки, знак перед закрывающейся скобкой
+            // РґРІР° Р·РЅР°РєР° РїРѕРґСЂСЏРґ, Р·РЅР°Рє РїРѕСЃР»Рµ РѕС‚РєСЂС‹РІР°СЋС‰РµР№СЃСЏ СЃРєРѕР±РєРё, Р·РЅР°Рє РїРµСЂРµРґ Р·Р°РєСЂС‹РІР°СЋС‰РµР№СЃСЏ СЃРєРѕР±РєРѕР№
         } i++;
     }
     if (mLexeme[0] == "-") { a = 0; }
@@ -205,7 +205,7 @@ int Tlexeme::Check_point()
     int a = -1, i = 0;
     while ((i < Size) && (a == -1))
     {
-        if (priority[i] == 2) // две и более точек в одном числе
+        if (priority[i] == 2) // РґРІРµ Рё Р±РѕР»РµРµ С‚РѕС‡РµРє РІ РѕРґРЅРѕРј С‡РёСЃР»Рµ
         {
             string f = mLexeme[i];
             int  k = count(f.begin(), f.end(), '.');
@@ -219,7 +219,7 @@ int Tlexeme::Check_variable()
     int a = -1, i = 0;
     while ((i < Size) && (a == -1))
     {
-        if ((priority[i] == 3) && (priority[i + 1] == 3)) { a = i; } // две переменные стоят подряд
+        if ((priority[i] == 3) && (priority[i + 1] == 3)) { a = i; } // РґРІРµ РїРµСЂРµРјРµРЅРЅС‹Рµ СЃС‚РѕСЏС‚ РїРѕРґСЂСЏРґ
         i++;
     }
     return a;

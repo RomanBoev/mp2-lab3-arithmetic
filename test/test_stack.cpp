@@ -1,4 +1,4 @@
-// тесты для стека
+п»ї// С‚РµСЃС‚С‹ РґР»СЏ СЃС‚РµРєР°
 
 #include "stack.h"
 #include <gtest.h>
@@ -31,7 +31,7 @@ TEST(TStack, view_element_into_TStack)
 	TStack<int>s;
 	s.Push(7);
 	EXPECT_EQ(7, s.Top());
-	EXPECT_EQ(0, s.Empty());  //элемент не был извлечен при просмотре
+	EXPECT_EQ(0, s.Empty());  //СЌР»РµРјРµРЅС‚ РЅРµ Р±С‹Р» РёР·РІР»РµС‡РµРЅ РїСЂРё РїСЂРѕСЃРјРѕС‚СЂРµ
 }
 TEST(TStack, can_put_element_larger_size_TStack)
 {
@@ -53,7 +53,7 @@ TEST(TStack, take_element_from_empty_TStack)
 	TStack<int>s;
 	s.Push(7);
 	EXPECT_EQ(7, s.Pop());
-	EXPECT_EQ(1, s.Empty());  //элемент был извлечен при просмотре
+	EXPECT_EQ(1, s.Empty());  //СЌР»РµРјРµРЅС‚ Р±С‹Р» РёР·РІР»РµС‡РµРЅ РїСЂРё РїСЂРѕСЃРјРѕС‚СЂРµ
 }
 TEST(TStack, get_the_number_of_elements_in_TStack)
 {
